@@ -1,0 +1,193 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Data Processing</title>
+</head>
+<body>
+    <h1>Stock Data Processing</h1>
+    <form method="post">
+        <label for="stock_symbol">Stock Symbol:</label>
+        <input type="text" id="stock_symbol" name="stock_symbol" required>
+        <br>
+        <label for="number_of_days">Number of Days for Prediction:</label>
+        <input type="number" id="number_of_days" name="number_of_days" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if train_rmse and test_rmse %}
+        <h2>RMSE Metrics</h2>
+        <p>Train RMSE: {{ train_rmse }}</p>
+        <p>Test RMSE: {{ test_rmse }}</p>
+    {% endif %}
+    {% if plot_filename1 %}
+        <h2>Train vs Test Predictions Plot</h2>
+        <iframe src="{{ url_for('static', filename=plot_filename1) }}" width="1000" height="500" frameborder="0"></iframe>
+    {% endif %}
+    {% if plot_filename2 %}
+        <h2>Train vs Test Predictions Plot</h2>
+        <iframe src="{{ url_for('static', filename=plot_filename2) }}" width="1000" height="500" frameborder="0"></iframe>
+    {% endif %}
+
+</body>
+</html>--
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Data Processing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .metrics {
+            margin-top: 30px;
+        }
+        .plot {
+            margin-top: 30px;
+        }
+        .graph-item iframe {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ddd;
+            border: 1px solid #fff; /* Set border color to white */
+            background-color: black;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Data Processing</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="stock_symbol">Stock Symbol:</label>
+                <input type="text" class="form-control" id="stock_symbol" name="stock_symbol" required>
+            </div>
+            <div class="form-group">
+                <label for="number_of_days">Number of Days for Prediction:</label>
+                <input type="number" class="form-control" id="number_of_days" name="number_of_days" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% if train_rmse and test_rmse %}
+            <div class="metrics">
+                <h2>RMSE Metrics</h2>
+                <p>Train RMSE: {{ train_rmse }}</p>
+                <p>Test RMSE: {{ test_rmse }}</p>
+            </div>
+        {% endif %}
+
+        {% if plot_filename1 %}
+          <h2>Train vs Test Predictions Plot</h2>
+          <iframe src="{{ url_for('static', filename=plot_filename1) }}" width="1000" height="500" frameborder="0"></iframe>
+        {% endif %}
+        {% if plot_filename2 %}
+          <h2>Future Predictions Plot</h2>
+          <iframe src="{{ url_for('static', filename=plot_filename2) }}" width="1000" height="500" frameborder="0"></iframe>
+        {% endif %}
+    </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NIFTY-50 STOCK PREDICTOR</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Custom CSS -->
+    <style>
+        body {
+
+
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .metrics {
+            margin-top: 30px;
+        }
+        .plot {
+            margin-top: 30px;
+            background-color:black;
+            width: 80%;
+        }
+        .graph-item iframe {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ddd;
+            border: 1px solid #fff; /* Set border color to white */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NIFTY-50 STOCK PREDICTOR</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="stock_symbol">Stock Symbol:</label>
+                <input type="text" class="form-control" id="stock_symbol" name="stock_symbol" required>
+            </div>
+            <div class="form-group">
+                <label for="number_of_days">Number of Days for Prediction:</label>
+                <input type="number" class="form-control" id="number_of_days" name="number_of_days" required>
+            </div>
+            <button type="submit" class="btn btn-primary" name="submit_btn" value="task1">Model 1</button>
+            <button type="submit" class="btn btn-primary" name="submit_btn" value="task2">Model 2</button>
+        </form>
+
+        {% if train_rmse and test_rmse %}
+            <div class="metrics">
+                <h2>RMSE Metrics</h2>
+                <p>Train RMSE: {{ train_rmse }}</p>
+                <p>Test RMSE: {{ test_rmse }}</p>
+            </div>
+        {% endif %}
+
+        {% if plot_filename1 %}
+          <h2>Train vs Test Predictions Plot</h2>
+          <div class="plot">
+              <iframe src="{{ url_for('static', filename=plot_filename1) }}?t={{ timestamp }}" width="900" height="500" frameborder="0"></iframe>
+          </div>
+        {% endif %}
+        {% if plot_filename2 %}
+          <h2>Future Predictions Plot</h2>
+          <div class="plot">
+              <iframe src="{{ url_for('static', filename=plot_filename2) }}?t={{ timestamp }}" width="900" height="500" frameborder="0"></iframe>
+          </div>
+        {% endif %}
+        {% if plot_filename3 %}
+        <h2>Future Predictions Plot</h2>
+        <div class="plot">
+            <iframe src="{{ url_for('static', filename=plot_filename3) }}?t={{ timestamp }}" width="900" height="500" frameborder="0"></iframe>
+        </div>
+      {% endif %}
+      {% if plot_filename4 %}
+        <h2>Future Predictions Plot</h2>
+        <div class="plot">
+            <iframe src="{{ url_for('static', filename=plot_filename4) }}?t={{ timestamp }}" width="900" height="500" frameborder="0"></iframe>
+        </div>
+      {% endif %}
+      {% if plot_filename5 %}
+        <h2>Future Predictions Plot</h2>
+        <div class="plot">
+            <iframe src="{{ url_for('static', filename=plot_filename5) }}?t={{ timestamp }}" width="1000" height="500" frameborder="1"></iframe>
+        </div>
+      {% endif %}
+    </div>
+</body>
+</html>
